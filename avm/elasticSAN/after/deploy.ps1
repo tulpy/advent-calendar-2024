@@ -1,0 +1,1 @@
+New-AzResourceGroupDeployment -ResourceGroupName avmDemoRG -TemplateParameterFile .\esan.bicepparam
