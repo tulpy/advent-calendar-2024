@@ -1,12 +1,10 @@
 using 'br/public:avm/res/fabric/capacity:0.1.1'
 
-// Required parameters
+param name = 'tulpyfabric'
+param skuName = 'F2'
 param adminMembers = [
   'stephen.tulp@insightaudemo.onmicrosoft.com'
 ]
-param name = 'tulpyfabric'
-// Non-required parameters
-param skuName = 'F2'
 param tags = {
   environment: 'test'
   applicationName: 'Microsoft Fabric'

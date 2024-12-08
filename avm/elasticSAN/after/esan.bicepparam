@@ -1,8 +1,6 @@
 using 'br/public:avm/res/elastic-san/elastic-san:0.1.0'
 
-// Required parameters
 param name = 'test'
-// Non-required parameters
 param availabilityZone = 1
 param baseSizeTiB = 2
 param extendedCapacitySizeTiB = 5
@@ -23,7 +21,7 @@ param volumeGroups = [
     name: 'volumeGroup1'
     virtualNetworkRules: [
       {
-        virtualNetworkSubnetResourceId: '<virtualNetworkSubnetResourceId>'
+        virtualNetworkSubnetResourceId: '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arg-syd-lz-prd-network/providers/Microsoft.Network/virtualNetworks/vnt-syd-lz-prd-10.15.0.0_24/subnets/app'
       }
     ]
     volumes: [
