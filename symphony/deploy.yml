@@ -1,0 +1,95 @@
+---
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      artefactName:
+        required: true
+        type: string
+        default: artefact
+      environmentName:
+        required: true
+        type: string
+      location:
+        required: true
+        type: string
+      managementGroupId:
+        required: true
+        type: string
+      templateFile:
+        required: true
+        type: string
+      templateParameterFile:
+        required: true
+        type: string
+      moduleName:
+        required: true
+        type: string
+
+permissions:
+  contents: read # This is required for actions/checkout
+  id-token: write # This is required for azure/login
+
+env:
+  deploymentJobId: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }} # Unique ID for the deployment job
+
+jobs:
+  deploy:
+    name: ${{ inputs.moduleName }}
+    environment: ${{ inputs.environmentName }}
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - name: Download Artefact from Build Job
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artefactName }}
+
+      - name: Az Login
+        uses: azure/login@v2.2.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      # What-If Deployment
+      - name: What-If Deployment
+        uses: Azure/cli@v2.1.0
+        with:
+          inlineScript: |
+            managementGroupId="${{ inputs.managementGroupId }}"
+            location="${{ inputs.location }}"
+            templateFile="${{ inputs.templateFile }}"
+            templateParameterFile="${{ inputs.templateParameterFile }}"
+            deploymentName="${{ inputs.moduleName }}-${{ github.run_number }}"
+
+            export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+            az deployment mg What-If -n $deploymentName -m $managementGroupId -l $location -f $templateFile -p $templateParameterFile -x Ignore NoChange Unsupported -r FullResourcePayloads
+
+      # Set PAL
+      - name: Set PAL
+        uses: Azure/cli@v2.1.0
+        with:
+          inlineScript: |
+            az extension add --name managementpartner
+            az managementpartner update --partner-id 1158331 || az managementpartner create --partner-id 1158331
+
+      # Create Landing Zone
+      - name: Deploy LZ
+        uses: Azure/cli@v2.1.0
+        with:
+          inlineScript: |
+            managementGroupId="${{ inputs.managementGroupId }}"
+            location="${{ inputs.location }}"
+            templateFile="${{ inputs.templateFile }}"
+            templateParameterFile="${{ inputs.templateParameterFile }}"
+            deploymentName="${{ inputs.moduleName }}-${{ github.run_number }}"
+
+            export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+            az deployment mg create -n $deploymentName -m $managementGroupId -l $location -f $templateFile -p $templateParameterFile
+
+      # Log out of Azure
+      - name: Az Logout
+        run: az logout
