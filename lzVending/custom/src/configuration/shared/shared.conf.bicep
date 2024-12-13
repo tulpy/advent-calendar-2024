@@ -1,11 +1,6 @@
-import * as type from './shared.types.bicep'
-
 @export()
 var locPrefixes = {
   australiaEast: 'syd'
-  australiaCentral: 'auc'
-  australiaCentral2: 'auc2'
-  australiaSoutheast: 'mel'
 }
 
 @export()

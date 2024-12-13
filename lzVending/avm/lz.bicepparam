@@ -1,14 +1,20 @@
-using 'br/public:avm/ptn/lz/sub-vending:0.2.1'
+using 'br/public:avm/ptn/lz/sub-vending:0.2.4'
+
+var envPrefix = 'sbx'
+var lzPrefix = 'sap'
+var locPrefix = 'syd'
+var argPrefix = 'arg'
+var virtualNetworkPrefix = 'vnt'
 
 param subscriptionAliasEnabled = false
-param existingSubscriptionId = '0b5d0018-2879-4810-b8d7-4f8dda5ce0b9'
+param existingSubscriptionId = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' //Update Subscription ID
 param resourceProviders = {}
 param roleAssignmentEnabled = true
 param roleAssignments = [
   {
-    definition: '/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635'
-    principalId: '2b33ff60-edf0-4216-b2a6-66ec07050fd4'
-    relativeScope: '/'
+    definition: '/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635' //owner GUID
+    principalId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // Update Principal ID
+    relativeScope: '/' // Subscription Scope
   }
 ]
 param subscriptionTags = {
@@ -17,18 +23,17 @@ param subscriptionTags = {
     owner: 'Platform Team'
     criticality: 'Tier2'
     costCenter: '1234'
-    contactEmail: 'stephen.tulp@outlook.com'
+    contactEmail: 'test@test.com'
     dataClassification: 'Internal'
     iac: 'Bicep'
 }
-param hubNetworkResourceId = '/subscriptions/5cb7efe0-67af-4723-ab35-0f2b42a85839/resourceGroups/arg-syd-plat-conn-network/providers/Microsoft.Network/virtualNetworks/vnt-syd-plat-conn-10.52.0.0_24'
+param hubNetworkResourceId = '/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/arg-syd-plat-conn-network/providers/Microsoft.Network/virtualNetworks/vnt-syd-plat-conn-10.52.0.0_24' //Update Hub Network Resource ID
 param virtualNetworkEnabled = true
 param virtualNetworkAddressSpace = [
   '10.52.1.0/24'
 ]
-param virtualNetworkName = 'vnt-syd-plat-sap-10.52.1.0_24'
+param virtualNetworkName = '${virtualNetworkPrefix}-${locPrefix}-${lzPrefix}-${envPrefix}-10.52.1.0_24'
 param virtualNetworkPeeringEnabled = true
-param virtualNetworkResourceGroupName = 'arg-syd-plat-conn-network'
+param virtualNetworkResourceGroupName = '${argPrefix}-${locPrefix}-${lzPrefix}-${envPrefix}-network'
 param virtualNetworkUseRemoteGateways = false
 
-var envPrefix = 'sbx'
