@@ -1,0 +1,1 @@
+New-AzDeployment  -TemplateFile .\main.bicep -TemplateParameterFile '.\configuration/main.bicepparam' -Location 'australiaeast'
