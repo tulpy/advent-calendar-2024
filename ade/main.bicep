@@ -19,10 +19,10 @@ param envPrefix string
 @description('Optional. The Azure Region to deploy the resources into.')
 param location string = deployment().location
 
-@description('An object of Tag key & value pairs to be appended to a Subscription.')
-param tags types.tagsType
+@description('Optional. An object of Tag key & value pairs to be appended to a Subscription.')
+param tags types.tagsType?
 
-@description('Name of Environment Type associated with Dev Center and Project')
+@description('Required. Name of Environment Type associated with Dev Center and Project')
 param environmentTypeName string
 
 @description('User object ID is required to assign the necessary role permission to create an environment. Leave this blank if you want to do so at a later time. For more details on finding the user ID, https://learn.microsoft.com/en-us/partner-center/find-ids-and-domain-names')
