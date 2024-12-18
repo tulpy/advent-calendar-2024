@@ -3,22 +3,22 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "enterpriseScaleCompanyPrefix": {
-      "value": "contoso"
+      "value": "mg-alz1"
     },
     "platformManagementGroup": {
-      "value": "contoso-platform"
+      "value": "mg-alz1-platform"
     },
     "IdentityManagementGroup": {
-      "value": "contoso-identity"
+      "value": "mg-alz1-platform-identity"
     },
     "managementManagementGroup": {
-      "value": "contoso-management"
+      "value": "mg-alz1-platform-management"
     },
     "connectivityManagementGroup": {
-      "value": "contoso-connectivity"
+      "value": "mg-alz1-platform-connectivity"
     },
     "LandingZoneManagementGroup": {
-      "value": "contoso-landingzones"
+      "value": "mg-alz1-landingzones"
     },
     "enableAMBAConnectivity": {
       "value": "Yes"
@@ -69,16 +69,16 @@
       "value": ""
     },
     "userAssignedManagedIdentityName": {
-      "value": "id-amba-prod-001"
+      "value": "umi-syd-amba-prd-001"
     },
     "managementSubscriptionId": {
-      "value": ""
+      "value": "0b5d0018-2879-4810-b8d7-4f8dda5ce0b9"
     },
     "ALZMonitorResourceGroupName": {
       "value": "rg-amba-monitoring-001"
     },
     "ALZMonitorResourceGroupLocation": {
-      "value": "eastus"
+      "value": "australiaeast"
     },
     "ALZMonitorResourceGroupTags": {
       "value": {
@@ -97,7 +97,7 @@
       ]
     },
     "ALZMonitorActionGroupEmail": {
-      "value": []
+      "value": ["test@test.com"]
     },
     "ALZLogicappResourceId": {
       "value": ""
