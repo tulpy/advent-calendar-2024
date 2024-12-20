@@ -1,0 +1,191 @@
+{
+  "roleAssignments": {
+    "added": [
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-connectivity",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-connectivity/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Connectivity': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Connectivity",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-connectivity/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Connectivity"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-platform/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-HybridVM': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Hybrid VMs",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-HybridVM"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-HybridVM': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Hybrid VMs",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-HybridVM"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-identity",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-identity/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Identity': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Identity",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-identity/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Identity"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-KeyMgmt': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Key Management",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-KeyMgmt"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-LoadBalance': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Load Balancing",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-LoadBalance"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-management",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-management/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Management': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Management",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform-management/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Management"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-NetworkChang': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Changes in Network Routing and Security",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-NetworkChang"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-RecoverySvc': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Recovery Services",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-RecoverySvc"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-SvcHealth': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Service Health",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-SvcHealth"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Storage': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Storage",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Storage"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-platform/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-VM': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Virtual Machines",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-platform/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-VM"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-VM': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Virtual Machines",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-VM"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Web': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts for Web",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev-landingzones/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Web"
+      },
+      {
+        "scope": "/providers/Microsoft.Management/managementGroups/mg-epacdev",
+        "properties": {
+          "principalType": "ServicePrincipal",
+          "principalId": null,
+          "description": "Policy Assignment '/providers/Microsoft.Management/managementGroups/mg-epacdev/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Notification': Role Assignment required by Policy, deployed by: 'epac/00000000-0000-0000-0000-000000000000/epac-canary'",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        "assignmentDisplayName": "Deploy Azure Monitor Baseline Alerts - Notification Assets",
+        "roleDisplayName": "Contributor",
+        "assignmentId": "/providers/Microsoft.Management/managementGroups/mg-epacdev/providers/Microsoft.Authorization/policyAssignments/Deploy-AMBA-Notification"
+      }
+    ],
+    "numberOfChanges": 15,
+    "updated": [],
+    "removed": []
+  },
+  "createdOn": "2024-12-20 03:26:52Z",
+  "pacOwnerId": "00000000-0000-0000-0000-000000000000"
+}

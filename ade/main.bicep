@@ -1,5 +1,5 @@
 import * as shared from './configuration/shared/shared.conf.bicep'
-import * as types from './configuration/shared/shared.types.bicep'
+import * as type from './configuration/shared/shared.types.bicep'
 
 targetScope = 'subscription'
 
@@ -20,7 +20,7 @@ param envPrefix string
 param location string = deployment().location
 
 @description('Optional. An object of Tag key & value pairs to be appended to a Subscription.')
-param tags types.tagsType?
+param tags type.tagsType
 
 @description('Required. Name of Environment Type associated with Dev Center and Project')
 param environmentTypeName string
@@ -28,10 +28,16 @@ param environmentTypeName string
 @description('User object ID is required to assign the necessary role permission to create an environment. Leave this blank if you want to do so at a later time. For more details on finding the user ID, https://learn.microsoft.com/en-us/partner-center/find-ids-and-domain-names')
 param userObjectId string = ''
 
+// Spoke Networking Parameters
+@description('The subnet resource id if the user wants to use existing subnet')
+param existingSubnetId string = ''
+
+
 // Variables
 var argPrefix = toLower('${shared.resPrefixes.resourceGroup}${shared.delimeters.dash}${shared.locPrefixes[location]}${shared.delimeters.dash}${lzPrefix}${shared.delimeters.dash}${envPrefix}')
 var adcPrefix = toLower('${shared.resPrefixes.devCenter}${shared.delimeters.dash}${shared.locPrefixes[location]}${shared.delimeters.dash}${lzPrefix}${shared.delimeters.dash}${envPrefix}')
 var prjPrefix = toLower('${shared.resPrefixes.project}${shared.delimeters.dash}${shared.locPrefixes[location]}${shared.delimeters.dash}${lzPrefix}${shared.delimeters.dash}${envPrefix}')
+
 var uniqueSuffix = substring(uniqueString(subscription().subscriptionId), 0, 6)
 
 var resourceGroups = {
@@ -66,7 +72,9 @@ module devCenter './modules/devCenter.bicep' = {
   params: {
     devCenterName: resourceNames.devcenter
     environmentTypeName: environmentTypeName
+    existingSubnetId:  !empty(existingSubnetId) ? existingSubnetId : ''
     location: location
+    networkingResourceGroupName: 'nics'
     projectName: resourceNames.project
     userObjectId: userObjectId
   }
