@@ -72,11 +72,10 @@ module devCenter './modules/devCenter.bicep' = {
   params: {
     devCenterName: resourceNames.devcenter
     environmentTypeName: environmentTypeName
-    existingSubnetId:  !empty(existingSubnetId) ? existingSubnetId : ''
+    subnetId:  !empty(existingSubnetId) ? existingSubnetId : ''
     location: location
     networkingResourceGroupName: 'nics'
     projectName: resourceNames.project
-    userObjectId: userObjectId
   }
 }
 
@@ -86,6 +85,8 @@ module identity './modules/identity.bicep' = {
   name: take('identity-${guid(deployment().name)}', 64)
   params: {
     devCenterName: devCenter.outputs.devCenterName
+    projectId: devCenter.outputs.projectId
     resourceGroupName: resourceGroupForDevCenter.outputs.name
+    userObjectId: userObjectId
   }
 }

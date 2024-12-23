@@ -7,8 +7,7 @@ param location string
 param devCenterName string
 param projectName string
 param environmentTypeName string
-param userObjectId string
-param existingSubnetId string = ''
+param subnetId string = ''
 param networkingResourceGroupName string
 
 var roles = [
@@ -80,17 +79,17 @@ resource catalog 'Microsoft.DevCenter/devcenters/catalogs@2023-04-01' = {
   }
 }
 
-resource networkConnection 'Microsoft.DevCenter/networkConnections@2023-01-01-preview' = if (!empty(existingSubnetId)) {
+resource networkConnection 'Microsoft.DevCenter/networkConnections@2023-01-01-preview' = if (!empty(subnetId)) {
   name: 'networkConnectionName'
   location: location
   properties: {
     domainJoinType: 'AzureADJoin'
-    subnetId: existingSubnetId
+    subnetId: subnetId
     networkingResourceGroupName: networkingResourceGroupName
   }
 }
 
-resource attachedNetworks 'Microsoft.DevCenter/devcenters/attachednetworks@2023-01-01-preview' = if (!empty(existingSubnetId)) {
+resource attachedNetworks 'Microsoft.DevCenter/devcenters/attachednetworks@2023-01-01-preview' = if (!empty(subnetId)) {
   parent: devcenter
   name: networkConnection.name
   properties: {
@@ -129,6 +128,7 @@ resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' = {
   dependsOn: [
     devcenterEnvironmentType
     devboxDefinitions
+    networkConnection
   ]
   identity: {
     type: 'SystemAssigned'
@@ -147,11 +147,11 @@ resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' = {
       properties: {
         devBoxDefinitionName: pool.definition
         displayName: pool.displayName
-        licenseType: 'Windows_Client'
+        licenseType: pool.licenseType
         localAdministrator: pool.administrator
-        managedVirtualNetworkRegions: empty(existingSubnetId) ? location : []
-        networkConnectionName: !empty(existingSubnetId) ? existingSubnetId : 'managedNetwork'
-        singleSignOnStatus: 'Enabled'
+        managedVirtualNetworkRegions: !empty(subnetId) ? [] : location
+        networkConnectionName: !empty(subnetId) ? networkConnection.name : 'managedNetwork'
+        singleSignOnStatus: pool.singleSignOnStatus
         stopOnDisconnect: {
           status: 'Enabled'
           gracePeriodMinutes: 60
@@ -160,27 +160,10 @@ resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' = {
           status: 'Enabled'
           gracePeriodMinutes: 60
         }
-        virtualNetworkType: !empty(existingSubnetId) ? 'Unmanaged' : 'Managed'
+        virtualNetworkType: !empty(subnetId) ? 'Unmanaged' : 'Managed'
       }
     }
   ]
-}
-
-// Module: Resource Role Assignment - https://github.com/Azure/bicep-registry-modules/tree/main/avm/ptn/authorization/resource-role-assignment
-module resourceRoleAssignment 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = if (userObjectId != '') {
-  name: take('resourceRoleAssignment-${guid(deployment().name)}', 64)
-  params: {
-    // Required parameters
-    principalId: userObjectId
-    resourceId: project.id
-    roleDefinitionId: subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions',
-      '18e40d4e-8d2e-438d-97e1-9528336e149c'
-    )
-    // Non-required parameters
-    description: 'Provides access to manage environment resources.'
-    principalType: 'User'
-  }
 }
 
 // Resource: Project Environment Types
@@ -209,6 +192,7 @@ output definitions array = [
 ]
 
 output projectName string = project.name
+output projectId string = project.id
 
 output poolNames array = [
   for (pool, i) in shared.pools: {
