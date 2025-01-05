@@ -1,20 +1,19 @@
 import * as shared from '../configuration/shared/shared.conf.bicep'
+import * as type from '../configuration/shared/shared.types.bicep'
 
 @description('An object of Tag key & value pairs to be appended to a Subscription.')
 param tags object?
 
 param location string
 param devCenterName string
-param projectName string
-param environmentTypeName string
 param subnetId string = ''
 param networkingResourceGroupName string
 
-var roles = [
-  {
-    id: '8e3af657-a8ff-443c-a75c-2fe8c4bcb635'
-    properties: {}
-  }
+var devCenterEnvironments = [
+  'sandbox'
+  'development'
+  'test'
+  'production'
 ]
 
 var image = {
@@ -46,7 +45,7 @@ var skus = {
 }
 
 // Resource: Dev Center
-resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
+resource devCenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
   name: devCenterName
   location: location
   identity: {
@@ -68,7 +67,7 @@ resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
 
 // Resource: Quickstart Environment Definitions
 resource catalog 'Microsoft.DevCenter/devcenters/catalogs@2023-04-01' = {
-  parent: devcenter
+  parent: devCenter
   name: 'azure-verifed-modules'
   properties: {
     gitHub: {
@@ -90,7 +89,7 @@ resource networkConnection 'Microsoft.DevCenter/networkConnections@2023-01-01-pr
 }
 
 resource attachedNetworks 'Microsoft.DevCenter/devcenters/attachednetworks@2023-01-01-preview' = if (!empty(subnetId)) {
-  parent: devcenter
+  parent: devCenter
   name: networkConnection.name
   properties: {
     networkConnectionId: networkConnection.id
@@ -100,12 +99,12 @@ resource attachedNetworks 'Microsoft.DevCenter/devcenters/attachednetworks@2023-
 // Resource: Dev Box Definitions
 resource devboxDefinitions 'Microsoft.DevCenter/devcenters/devboxdefinitions@2024-10-01-preview' = [
   for definition in shared.definitions: {
-    parent: devcenter
+    parent: devCenter
     name: definition.name
     location: location
     properties: {
       imageReference: {
-        id: '${devcenter.id}/galleries/default/images/${image[definition.image]}'
+        id: '${devCenter.id}/galleries/default/images/${image[definition.image]}'
       }
       sku: {
         name: skus[definition.sku]
@@ -116,86 +115,17 @@ resource devboxDefinitions 'Microsoft.DevCenter/devcenters/devboxdefinitions@202
 ]
 
 // Resource: Environment Type
-resource devcenterEnvironmentType 'Microsoft.DevCenter/devcenters/environmentTypes@2023-04-01' = {
-  parent: devcenter
-  name: environmentTypeName
+resource devcenterEnvironments 'Microsoft.DevCenter/devcenters/environmentTypes@2023-04-01' = [for item in devCenterEnvironments: {
+  parent: devCenter
+  name: item
   tags: tags
 }
+]
 
-// Resource: Project
-resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' = {
-  name: projectName
-  dependsOn: [
-    devcenterEnvironmentType
-    devboxDefinitions
-    networkConnection
-  ]
-  identity: {
-    type: 'SystemAssigned'
-  }
-  location: location
-  tags: tags
-  properties: {
-    devCenterId: devcenter.id
-    maxDevBoxesPerUser: 2
-  }
-  // Resource: Project Environment Pools
-  resource pools 'pools' = [
-    for pool in shared.pools: {
-      name: pool.name
-      location: location
-      properties: {
-        devBoxDefinitionName: pool.definition
-        displayName: pool.displayName
-        licenseType: pool.licenseType
-        localAdministrator: pool.administrator
-        managedVirtualNetworkRegions: !empty(subnetId) ? [] : location
-        networkConnectionName: !empty(subnetId) ? networkConnection.name : 'managedNetwork'
-        singleSignOnStatus: pool.singleSignOnStatus
-        stopOnDisconnect: {
-          status: 'Enabled'
-          gracePeriodMinutes: 60
-        }
-        stopOnNoConnect: {
-          status: 'Enabled'
-          gracePeriodMinutes: 60
-        }
-        virtualNetworkType: !empty(subnetId) ? 'Unmanaged' : 'Managed'
-      }
-    }
-  ]
-}
-
-// Resource: Project Environment Types
-resource projectEnvironmentType 'Microsoft.DevCenter/projects/environmentTypes@2024-10-01-preview' = {
-  parent: project
-  name: environmentTypeName
-  identity: {
-    type: 'SystemAssigned'
-  }
-  tags: tags
-  properties: {
-    status: 'Enabled'
-    deploymentTargetId: subscription().id
-    creatorRoleAssignment: {
-      roles: toObject(roles, role => role.id, role => role.properties)
-    }
-  }
-}
-
-output devCenterName string = devcenter.name
+output devCenterName string = devCenter.name
 
 output definitions array = [
   for (definition, i) in shared.definitions: {
     name: devboxDefinitions[i].name
-  }
-]
-
-output projectName string = project.name
-output projectId string = project.id
-
-output poolNames array = [
-  for (pool, i) in shared.pools: {
-    name: project::pools[i].name
   }
 ]

@@ -2,8 +2,6 @@ targetScope = 'subscription'
 
 param devCenterName string
 param resourceGroupName string
-param userObjectId string
-param projectId string
 
 resource devcenter 'Microsoft.DevCenter/devcenters@2023-04-01' existing = {
   scope: resourceGroup(resourceGroupName)
@@ -30,20 +28,3 @@ resource contributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022
   }
 }
 
-// Module: Resource Role Assignment - https://github.com/Azure/bicep-registry-modules/tree/main/avm/ptn/authorization/resource-role-assignment
-module resourceRoleAssignment 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = if (userObjectId != '') {
-  name: take('resourceRoleAssignment-${guid(deployment().name)}', 64)
-  scope: resourceGroup(resourceGroupName)
-  params: {
-    // Required parameters
-    principalId: userObjectId
-    resourceId: projectId
-    roleDefinitionId: subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions',
-      '18e40d4e-8d2e-438d-97e1-9528336e149c'
-    )
-    // Non-required parameters
-    description: 'Provides access to manage environment resources.'
-    principalType: 'User'
-  }
-}

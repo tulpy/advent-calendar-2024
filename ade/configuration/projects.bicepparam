@@ -14,17 +14,20 @@ param tags = {
 }
 param projectConfig = {
     name: 'default'
+    displayName: 'Default'
     description: 'This is the default project'
     maxDevBoxesPerUser: 2
-    userObjectId: 'e5906c27-d401-4768-9c79-1dab42fd1a80'
+    groupObjectId: '40f29607-4e3d-4501-b400-f57723b2ae8e'
     pools: [
       {
         name: 'standard'
+        devBoxDefinitionName: 'win11-vs2022-vscode'
         displayName: 'Standard'
         licenseType: 'Windows_Client'
-        singleSignOnStatus: 'Enabled'
+        localAdministrator: 'Enabled'
         networkConnectionName: 'networkConnectionName'
-        StopOnDisconnect: {
+        singleSignOnStatus: 'Enabled'
+        stopOnDisconnect: {
           status: 'Enabled'
           gracePeriodMinutes: 60
         }
@@ -32,8 +35,6 @@ param projectConfig = {
           status: 'Enabled'
           gracePeriodMinutes: 60
         }
-        devBoxDefinitionName: 'win11-vs2022-vscode'
-        localAdministrator: 'Enabled'
       }
       {
         name: 'standard1'
@@ -41,7 +42,7 @@ param projectConfig = {
         licenseType: 'Windows_Client'
         singleSignOnStatus: 'Enabled'
         networkConnectionName: 'networkConnectionName'
-        StopOnDisconnect: {
+        stopOnDisconnect: {
           status: 'Enabled'
           gracePeriodMinutes: 60
         }
