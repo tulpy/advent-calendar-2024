@@ -1,14 +1,22 @@
 import * as shared from '../configuration/shared/shared.conf.bicep'
 import * as type from '../configuration/shared/shared.types.bicep'
 
-@description('An object of Tag key & value pairs to be appended to a Subscription.')
-param tags object?
-
+@description('Required. The Azure Region to deploy the resources into.')
 param location string
+
+@description('Optional. An object of Tag key & value pairs to be appended to a Subscription.')
+param tags type.tagsType
+
+@description('Required. The Microsoft Dev Center name.')
 param devCenterName string
+
+@description('Optional. The Subnet Id to deploy the resources into, if it is empty Microsoft networking will be used.')
 param subnetId string = ''
+
+@description('Required. The name for resource group where NICs will be placed.')
 param networkingResourceGroupName string
 
+// Variables
 var devCenterEnvironments = [
   'sandbox'
   'development'
@@ -21,14 +29,6 @@ var image = {
   'win11-ent-m365': 'microsoftwindowsdesktop_windows-ent-cpc_win11-21h2-ent-cpc-m365'
   'win11-ent-vs2022': 'microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2'
 }
-
-/*
-var compute = {
-  '8c-32gb': 'general_i_8c32gb256ssd_v2'
-  '16c-64gb': 'general_i_16c64gb512ssd_v2'
-  '32c-128gb': 'general_i_32c128gb1024ssd_v2'
-}
-*/
 
 var skus = {
   '8-vcpu-32gb-ram-256-ssd': 'general_i_8c32gb256ssd_v2'
@@ -68,7 +68,7 @@ resource devCenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
 // Resource: Quickstart Environment Definitions
 resource catalog 'Microsoft.DevCenter/devcenters/catalogs@2023-04-01' = {
   parent: devCenter
-  name: 'azure-verifed-modules'
+  name: 'quickstart-environment-definitions'
   properties: {
     gitHub: {
       uri: 'https://github.com/microsoft/devcenter-catalog.git'

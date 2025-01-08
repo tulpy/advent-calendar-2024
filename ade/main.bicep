@@ -71,9 +71,10 @@ module devCenter './modules/devCenter.bicep' = {
   ]
   params: {
     devCenterName: resourceNames.devcenter
-    subnetId:  !empty(existingSubnetId) ? existingSubnetId : ''
     location: location
     networkingResourceGroupName: 'nics'
+    subnetId:  !empty(existingSubnetId) ? existingSubnetId : ''
+    tags: tags
   }
 }
 
